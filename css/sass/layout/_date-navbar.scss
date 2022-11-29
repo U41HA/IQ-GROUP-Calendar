@@ -1,0 +1,17 @@
+.date__wrapper {
+    padding: 12px 0px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-navbar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.date-navbar__month {
+    min-width: 150px;
+    text-align: center;
+}

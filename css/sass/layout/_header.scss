@@ -1,0 +1,32 @@
+.header {
+    background-color: $color-neutral-100;
+}
+
+.header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 52px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search {
+    position: relative;
+    &::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        background: url(/calendar/assets/icons/search.svg) center center no-repeat;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: -40px;
+    }
+}

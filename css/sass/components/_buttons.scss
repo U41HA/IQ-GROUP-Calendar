@@ -1,0 +1,91 @@
+.button {
+    @include font(1.2rem);
+    cursor: pointer;
+    border: none;
+}
+
+.main-button {
+    color: $color-light-100;
+    border-radius: 2px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+    padding: 6px 12px;
+    background-color: $color-blue-300;
+    @extend %button-transition;
+
+    &:hover {
+        background-color: $color-blue-200;
+        @extend %button-transition;
+    }
+
+    &:active {
+        background-color: $color-blue-100;
+        @extend %button-transition;
+    }
+
+    &:disabled {
+        background-color: $color-neutral-200;
+        cursor: default;
+    }
+}
+
+.extra-button {
+    background-color: $color-light-100;
+    color: $color-dark-200;
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    padding: 2px 6px;
+    @extend %button-transition;
+
+    &:hover {
+        color: $color-light-100;
+        background-color: $color-dark-100;
+        @extend %button-transition;
+    }
+
+    &:active {
+        box-shadow: none;
+        background-color: $color-neutral-200;
+        @extend %button-transition;
+    }
+
+    &:disabled {
+        background-color: $color-light-100;
+        color: $color-neutral-200;
+        border: 1px solid $color-neutral-200;
+        @extend %button-transition;
+        cursor: default;
+    }
+}
+
+.date-navbar__slide {
+    display: block;
+    width: 32px;
+    height: 24px;
+    background-color: $color-light-100;
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    background: url(/calendar/assets/icons/arrow.svg) center center no-repeat;
+    @extend %button-transition;
+
+    &:hover {
+        background: url(/calendar/assets/icons/arrow-light.svg) center center no-repeat, $color-dark-100;
+        @extend %button-transition;
+    }
+
+    &:active {
+        background: url(/calendar/assets/icons/arrow-light.svg) center center no-repeat, $color-neutral-200;
+        @extend %button-transition;
+    }
+
+    &:disabled {
+        background: url(/calendar/assets/icons/arrow-neutral.svg) center center no-repeat;
+        border: 1px solid $color-neutral-200;
+        @extend %button-transition;
+        cursor: default;
+    }
+
+    &-left {
+        transform: rotate(180deg);
+    }
+}
