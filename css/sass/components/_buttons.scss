@@ -65,21 +65,21 @@
     background-color: $color-light-100;
     box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
-    background: url(/calendar/assets/icons/arrow.svg) center center no-repeat;
+    background: url(../assets/icons/arrow.svg) center center no-repeat;
     @extend %button-transition;
 
     &:hover {
-        background: url(/calendar/assets/icons/arrow-light.svg) center center no-repeat, $color-dark-100;
+        background: url(../assets/icons/arrow-light.svg) center center no-repeat, $color-dark-100;
         @extend %button-transition;
     }
 
     &:active {
-        background: url(/calendar/assets/icons/arrow-light.svg) center center no-repeat, $color-neutral-200;
+        background: url(../assets/icons/arrow-light.svg) center center no-repeat, $color-neutral-200;
         @extend %button-transition;
     }
 
     &:disabled {
-        background: url(/calendar/assets/icons/arrow-neutral.svg) center center no-repeat;
+        background: url(../assets/icons/arrow-neutral.svg) center center no-repeat;
         border: 1px solid $color-neutral-200;
         @extend %button-transition;
         cursor: default;

@@ -467,16 +467,16 @@ html {
   background-color: #FFFFFF;
   box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  background: url(/calendar/assets/icons/arrow.svg) center center no-repeat;
+  background: url(../assets/icons/arrow.svg) center center no-repeat;
 }
 .date-navbar__slide:hover {
-  background: url(/calendar/assets/icons/arrow-light.svg) center center no-repeat, #6B6B6B;
+  background: url(../assets/icons/arrow-light.svg) center center no-repeat, #6B6B6B;
 }
 .date-navbar__slide:active {
-  background: url(/calendar/assets/icons/arrow-light.svg) center center no-repeat, #CFCFCF;
+  background: url(../assets/icons/arrow-light.svg) center center no-repeat, #CFCFCF;
 }
 .date-navbar__slide:disabled {
-  background: url(/calendar/assets/icons/arrow-neutral.svg) center center no-repeat;
+  background: url(../assets/icons/arrow-neutral.svg) center center no-repeat;
   border: 1px solid #CFCFCF;
   cursor: default;
 }
