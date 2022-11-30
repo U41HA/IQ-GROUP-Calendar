@@ -250,15 +250,26 @@ function addOrOverviewEvent() {
 
         function addEvent() {
             let thisDay = document.querySelector('.day.active');
+
             thisDay.querySelector('.cell-title-text').textContent = popupEventTitle.value;
             thisDay.querySelector('.event-description').textContent = popupEventDescription.value;
             thisDay.querySelector('.cell-description-text').textContent = popupEventMembers.value;
-            thisDay.classList.add('day-filled');
-            buttonDelete.removeAttribute('disabled', 'disabled');
-            setLocaleStorage(thisDay);
-            searchListPush(thisDay);
-            resetInput();
-            addPopupRemove();
+
+            let thisDayTitle = thisDay.querySelector('.cell-title-text').textContent;
+            let thisDayDescription = thisDay.querySelector('.event-description').textContent;
+            let thisDayMembers = thisDay.querySelector('.cell-description-text').textContent;
+
+            if (thisDayTitle || thisDayDescription || thisDayMembers) {
+                thisDay.classList.add('day-filled');
+                buttonDelete.removeAttribute('disabled', 'disabled');
+                setLocaleStorage(thisDay);
+                searchListPush(thisDay);
+                resetInput();
+                addPopupRemove();
+            } else {
+                resetInput();
+                addPopupRemove();
+            }
         }
 
         function resetInput() {
@@ -425,7 +436,7 @@ function addOrOverviewEvent() {
         searchItem.append(searchItemMembers);
 
         for (let i = 0; i <= searchItems.length; i++) {
-            if (searchItems[i] && searchItem.querySelector('.search__date').textContent == searchItems[i].querySelector('.search__date').textContent){
+            if (searchItems[i] && searchItem.querySelector('.search__date').textContent == searchItems[i].querySelector('.search__date').textContent) {
                 searchItems[i].remove();
                 searchList.append(searchItem);
             } else {
@@ -453,12 +464,12 @@ searchInput.addEventListener('click', searchPopupShow);
 function searchPopupShow() {
     const eventSearchPopup = document.querySelector('.event-search-popup-container');
     let searchArr = document.querySelectorAll('.event-search-popup__item');
-    
+
     document.addEventListener('click', bodyClosePopup, true);
     searchInput.addEventListener('input', searchEvent);
     searchInput.removeEventListener('click', searchPopupShow);
 
-    if (!searchList.firstElementChild) {return};
+    if (!searchList.firstElementChild) { return };
 
     if (!eventSearchPopup.classList.contains('active')) {
         eventSearchPopup.classList.add('active');
@@ -466,7 +477,7 @@ function searchPopupShow() {
 
     for (let i = 0; i < searchArr.length; i++) {
         searchArr[i].addEventListener('click', goToEvent);
-    } 
+    }
 
     function eventSearchPopupRemove() {
         if (eventSearchPopup.classList.contains('active')) {
@@ -477,7 +488,7 @@ function searchPopupShow() {
         searchInput.addEventListener('click', searchPopupShow);
         for (let i = 0; i < searchArr.length; i++) {
             searchArr[i].removeEventListener('click', goToEvent);
-        } 
+        }
     }
 
     function bodyClosePopup(e) {
@@ -485,7 +496,7 @@ function searchPopupShow() {
         if (!popupClick) {
             eventSearchPopupRemove();
         }
-    }  
+    }
 
     function searchEvent() {
         let searchQuery = searchInput.value.toLowerCase();
@@ -497,7 +508,7 @@ function searchPopupShow() {
             let membersSearch = searchArr[i].querySelector('.search__members').textContent.toLowerCase();
 
             searchArr[i].classList.remove('hidden');
-            
+
             if (!titleSearch.includes(searchQuery) && !dateSearch.includes(searchQuery) && !descriptionSearch.includes(searchQuery) && !membersSearch.includes(searchQuery)) {
                 searchArr[i].classList.add('hidden');
             }
