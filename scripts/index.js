@@ -393,6 +393,8 @@ function addOrOverviewEvent() {
     }
 
     function searchListPush(thisDay) {
+        let searchItems = document.querySelectorAll('.event-search-popup__item');
+
         let eventTitle = thisDay.querySelector('.cell-title-text').textContent;
         let eventDate = thisDay.querySelector('.full-day').textContent;
         let eventMembers = thisDay.querySelector('.cell-description-text').textContent;
@@ -421,7 +423,15 @@ function addOrOverviewEvent() {
         searchItem.append(searchItemDate);
         searchItem.append(searchItemDescription);
         searchItem.append(searchItemMembers);
-        searchList.append(searchItem);
+
+        for (let i = 0; i <= searchItems.length; i++) {
+            if (searchItems[i] && searchItem.querySelector('.search__date').textContent == searchItems[i].querySelector('.search__date').textContent){
+                searchItems[i].remove();
+                searchList.append(searchItem);
+            } else {
+                searchList.append(searchItem);
+            }
+        }
     }
 
     function searchListRemove(thisDay) {
@@ -454,6 +464,10 @@ function searchPopupShow() {
         eventSearchPopup.classList.add('active');
     }
 
+    for (let i = 0; i < searchArr.length; i++) {
+        searchArr[i].addEventListener('click', goToEvent);
+    } 
+
     function eventSearchPopupRemove() {
         if (eventSearchPopup.classList.contains('active')) {
             eventSearchPopup.classList.remove('active');
@@ -461,6 +475,9 @@ function searchPopupShow() {
         searchInput.removeEventListener('input', searchEvent);
         document.removeEventListener('click', bodyClosePopup, true);
         searchInput.addEventListener('click', searchPopupShow);
+        for (let i = 0; i < searchArr.length; i++) {
+            searchArr[i].removeEventListener('click', goToEvent);
+        } 
     }
 
     function bodyClosePopup(e) {
@@ -488,14 +505,17 @@ function searchPopupShow() {
     }
 }
 
-
-
-
-
-
-
-
-
+function goToEvent() {
+    let currentYear = date.getFullYear();
+    let eventDate = this.querySelector('.search__date').textContent;
+    date = new Date(`${currentYear}, ${eventDate}`);
+    showMonth();
+    for (let i = 0; i < daysCell.length; i++) {
+        if (daysCell[i].querySelector('.full-day').textContent === eventDate) {
+            daysCell[i].click();
+        }
+    }
+}
 
 // Saving search field
 function setLocaleStorageSearchList() {
