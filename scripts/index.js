@@ -1,18 +1,29 @@
 // Date output
-
 const monthOutput = document.querySelector('.date-navbar__month');
 const daysCell = document.querySelectorAll('.day');
+const monthYearOptions = { month: 'long', year: 'numeric', };
+const monthOptions = { month: 'long', }
 let date = new Date();
 
 function showMonth() {
-    let monthYearOptions = { month: 'long', year: 'numeric' };
-    let monthOptions = { month: 'long', }
+    let currentMonth = date.getMonth();
+    let currentYear = date.getFullYear();
+
+    const nextMonthButton = document.querySelector('.date-navbar__slide-right');
+    const prevMonthButton = document.querySelector('.date-navbar__slide-left');
+    const todayButton = document.querySelector('.date-navbar__button');
+    const refreshButton = document.querySelector('.buttons__refresh')
+    
+    refreshButton.addEventListener('click', refreshApp);
+    todayButton.addEventListener('click', goToday);
+    nextMonthButton.addEventListener('click', nextMonth);
+    prevMonthButton.addEventListener('click', prevMonth);
+
     monthOutput.textContent = date.toLocaleDateString('en-US', monthYearOptions);
 
     function dateReset() {
         date = new Date(currentYear, currentMonth);
         date.setDate(1);
-
     }
 
     function dayOfWeek() {
@@ -20,9 +31,6 @@ function showMonth() {
         if (dayOfWeek === 0) dayOfWeek += 7;
         return dayOfWeek;
     }
-
-    let currentMonth = date.getMonth();
-    let currentYear = date.getFullYear();
 
     dateReset();
 
@@ -42,49 +50,78 @@ function showMonth() {
     }
 
     dateReset();
+
+    getLocalStorage();
+
+
+    function getLocalStorage() {
+        for (let i = 0; i < daysCell.length; i++) {
+            deleteEvent(i);
+            let filledDay = daysCell[i].querySelector('.full-day').textContent;
+            if (filledDay in localStorage) {
+                daysCell[i].innerHTML = localStorage.getItem(`${filledDay}`);
+                daysCell[i].classList.add('day-filled');
+            }
+        }
+
+        function deleteEvent(i) {
+            daysCell[i].querySelector('.cell-title-text').textContent = '';
+            daysCell[i].querySelector('.cell-description-text').textContent = '';
+            daysCell[i].querySelector('.event-description').textContent = '';
+            if (daysCell[i].querySelector('.cell-date-text').firstChild.length > 2 && i > 6) {
+                daysCell[i].querySelector('.cell-date-text').firstChild.textContent = '';
+            }
+            daysCell[i].classList.remove('day-filled');
+        }
+    }
+
+    // Date slide
+
+    function nextMonth() {
+        dateReset();
+        date.setMonth(date.getMonth() + 1);
+        monthOutput.textContent = date.toLocaleDateString('en-US', monthYearOptions);
+        showMonth();
+    }
+
+    function prevMonth() {
+        dateReset();
+        date.setMonth(date.getMonth() - 1);
+        monthOutput.textContent = date.toLocaleDateString('en-US', monthYearOptions);
+        showMonth();
+    }
+
+    // Today button
+
+    function goToday() {
+        date = new Date();
+        showMonth();
+    }
+
+    // Refresh button
+
+    function refreshApp() {
+        location.reload();
+    }
 }
 
-showMonth();
-
-// Date slide
-
-function nextMonth() {
-    date.setMonth(date.getMonth() + 1);
-    let options = { month: 'long', year: 'numeric' };
-    monthOutput.textContent = date.toLocaleDateString('en-US', options);
-
-    showMonth();
-}
-
-function prevMonth() {
-    date.setMonth(date.getMonth() - 1);
-    const options = { month: 'long', year: 'numeric' };
-    monthOutput.textContent = date.toLocaleDateString('en-US', options);
-
-    showMonth();
-}
-const nextMonthButton = document.querySelector('.date-navbar__slide-right');
-const prevMonthButton = document.querySelector('.date-navbar__slide-left');
-nextMonthButton.addEventListener('click', nextMonth);
-prevMonthButton.addEventListener('click', prevMonth);
-
-// Today button
-function goToday() {
-    date = new Date();
-    showMonth();
-}
-
-const todayButton = document.querySelector('.date-navbar__button');
-todayButton.addEventListener('click', goToday);
-
-
+window.addEventListener('load', showMonth);
 
 // Quick event add popup
 
 const addEventButton = document.querySelector('.buttons__add');
-const quickAddPopup = document.querySelector('.event-quick-add-container');
+addEventButton.addEventListener('click', quickAddPopupShow);
 
 function quickAddPopupShow() {
+
+    const quickAddPopup = document.querySelector('.event-quick-add-container');
+    const closeButton = document.querySelector('.event-quick-add__close');
+    const createButton = document.querySelector('.button-done');
+
+    createButton.addEventListener('click', eventQuickAdd);
+    closeButton.addEventListener('click', quickAddPopupRemove);
+    document.addEventListener('click', bodyClosePopup, true);
+
     if (!quickAddPopup.classList.contains('active')) {
         quickAddPopup.classList.add('active');
     }
@@ -93,6 +130,10 @@ function quickAddPopupShow() {
         if (quickAddPopup.classList.contains('active')) {
             quickAddPopup.classList.remove('active');
         }
+        closeButton.removeEventListener('click', quickAddPopupRemove);
+        createButton.removeEventListener('click', eventQuickAdd);
+        document.removeEventListener('click', bodyClosePopup, true);
+        createButton.removeEventListener('click', eventQuickAdd);
     }
 
     function bodyClosePopup(e) {
@@ -101,10 +142,6 @@ function quickAddPopupShow() {
             quickAddPopupRemove();
         }
     }
-
-    const closeButton = document.querySelector('.event-quick-add__close');
-    closeButton.addEventListener('click', quickAddPopupRemove);
-    document.addEventListener('click', bodyClosePopup, true);
 
     function eventQuickAdd() {
         const quickAddPopupInput = document.querySelector('.event-quick-add-popup__input');
@@ -122,30 +159,24 @@ function quickAddPopupShow() {
             let cellMembers = cellMembersArr.join(', ');
 
             const dayList = document.querySelectorAll('.full-day');
-            for (let i = 0; dayList.length; i++) {
+            for (let i = 0; i < dayList.length; i++) {
                 if (dayList[i].textContent === cellDate) {
                     daysCell[i].children[1].innerHTML = cellDescription;
                     daysCell[i].children[2].innerHTML = cellMembers;
                     daysCell[i].classList.add('day-filled');
+                    setLocaleStorage(i);
                 }
             }
+
+            function setLocaleStorage(i) {
+                let daySaved = daysCell[i].innerHTML;
+                localStorage.setItem(`${cellDate}`, daySaved);
+            }
         }
-
     }
-    const createButton = document.querySelector('.button-done');
-    createButton.addEventListener('click', eventQuickAdd);
 }
 
-addEventButton.addEventListener('click', quickAddPopupShow);
 
-// Refresh button
-
-function refreshApp() {
-    location.reload();
-}
-
-const refreshButton = document.querySelector('.buttons__refresh')
-refreshButton.addEventListener('click', refreshApp);
 
 // Event add/overview/edit
 daysCell.forEach(day => day.addEventListener('click', setActiveDay));
@@ -161,7 +192,6 @@ function addOrOverviewEvent() {
     const eventPreviewPopup = document.querySelector('.event-overview-popup-container');
 
     let thisDay = document.querySelector('.day.active');
-    let eventFullDate = thisDay.lastElementChild.textContent;
     let coordY = thisDay.offsetTop + 'px';
     let coordX = thisDay.offsetLeft + thisDay.offsetWidth + 10 + 'px';
 
@@ -190,9 +220,9 @@ function addOrOverviewEvent() {
         buttonDelete.addEventListener('click', deleteEvent);
         document.addEventListener('click', bodyClosePopup, true);
 
-        popupEventDate.value = eventFullDate;
+        popupEventDate.value = thisDay.querySelector('.full-day').textContent;
         popupEventTitle.value = thisDay.querySelector('.cell-title-text').textContent;
-        popupEventDescription.value =  thisDay.querySelector('.event-description').textContent;
+        popupEventDescription.value = thisDay.querySelector('.event-description').textContent;
         popupEventMembers.value = thisDay.querySelector('.cell-description-text').textContent;
 
         if (!thisDay.classList.contains('day-filled')) {
@@ -207,6 +237,7 @@ function addOrOverviewEvent() {
             thisDay.querySelector('.cell-description-text').textContent = popupEventMembers.value;
             thisDay.classList.add('day-filled');
             buttonDelete.removeAttribute('disabled', 'disabled');
+            setLocaleStorage(thisDay);
             resetInput();
             addPopupRemove();
         }
@@ -217,15 +248,15 @@ function addOrOverviewEvent() {
             popupEventMembers.value = '';
             popupEventDescription.value = '';
         }
-        
+
         function deleteEvent() {
             thisDay.querySelector('.cell-title-text').textContent = '';
             thisDay.querySelector('.cell-description-text').textContent = '';
             thisDay.querySelector('.event-description').textContent = '';
-
-            resetInput();
-
             thisDay.classList.remove('day-filled');
+
+            localeStorageEventRemove(thisDay);
+            resetInput();
             addPopupRemove();
         }
 
@@ -291,6 +322,7 @@ function addOrOverviewEvent() {
             popupEventDescription.value = '';
 
             thisDay.classList.remove('day-filled');
+            localeStorageEventRemove(thisDay);
             overviewPopupRemove();
         }
 
@@ -328,7 +360,21 @@ function addOrOverviewEvent() {
                 overviewPopupRemove();
             }
         }
-    };
+    }
+
+    function setLocaleStorage(thisDay) {
+        let daySaved = thisDay.innerHTML;
+        let daySavedDate = thisDay.querySelector('.full-day').textContent;
+        localStorage.setItem(`${daySavedDate}`, daySaved);
+    }
+
+    function localeStorageEventRemove(thisDay) {
+        localStorage.removeItem(`${thisDay.querySelector('.full-day').textContent}`);
+    }
 }
+
+
+// LocalStorage
+
 
 
