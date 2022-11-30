@@ -497,7 +497,7 @@ html {
 }
 .input::-webkit-search-cancel-button {
   -webkit-appearance: none;
-  background: url(/calendar/assets/icons/cross.svg) center center no-repeat;
+  background: url(../assets/icons/cross.svg) center center no-repeat;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -551,7 +551,7 @@ html {
   margin-left: auto;
   width: 6px;
   height: 6px;
-  background: url(/calendar/assets/icons/cross-popup.svg) center center no-repeat;
+  background: url(../assets/icons/cross-popup.svg) center center no-repeat;
   transition: scale 0.1s;
 }
 .close-icon:hover {
@@ -711,7 +711,7 @@ html {
   content: "";
   width: 18px;
   height: 18px;
-  background: url(/calendar/assets/icons/search.svg) center center no-repeat;
+  background: url(../assets/icons/search.svg) center center no-repeat;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
