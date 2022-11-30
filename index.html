@@ -34,6 +34,14 @@
                     </div>
                 </div>
             </div>
+            <div class="event-search-popup-container popup-container">
+                <div class="popups__decoration popups__decoration-event-search"></div>
+                <div class="popups event-search-popup">
+                    <ul class="event-search-popup__list">
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </header>
     <main>
@@ -362,48 +370,51 @@
         </section>
 
         <div class="popups-area">
-
-            <div class="event-add-popup-container popup-container">
-                <div class="popups event-add-popup">
-                    <div class="popups__decoration popups__decoration-event-add"></div>
-                    <div class="icon close-icon event-add-popup__close"></div>
-                    <form action class="event-add-popup__form">
-                        <input type="text" name="event-name" placeholder="Event"
-                            class="input event-add-popup__input-event-name">
-                        <input type="text" name="date" placeholder="Month, Day"
-                            class="input event-add-popup__input-date" readonly>
-                        <input type="text" name="members" placeholder="Members name"
-                            class="input event-add-popup__input-members">
-                        <textarea name="description" cols="30" rows="10" placeholder="Describe"
-                            class="input event-add-popup__input-description"></textarea>
-                    </form>
-                    <div class="popup-buttons">
-                        <button class="button extra-button popup-add__button-done">Done</button>
-                        <button class="button extra-button popup-add__button-delete">Delete</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="event-overview-popup-container popup-container">
-                <div class="popups event-overview-popup">
-                    <div class="popups__decoration popups__decoration-event-overview"></div>
-                    <div class="icon close-icon event-overview-popup__close"></div>
-                    <div class="event-overview-popup__description">
-                        <p class="month-text event-overview-popup__event-title"></p>
-                        <p class="input-text event-overview-popup__event-date"></p>
-                        <div class="members">
-                            <p class="input-text-add event-overview-popup__members-title">Members:</p>
-                            <p class="button-title-text event-overview-popup__members-text"></p>
+            <div class="wrapper">
+                <div class="event-add-popup-container popup-container">
+                    <div class="popups event-add-popup">
+                        <div class="popups__decoration popups__decoration-event-add"></div>
+                        <div class="icon close-icon event-add-popup__close"></div>
+                        <form action class="event-add-popup__form">
+                            <input type="text" name="event-name" placeholder="Event"
+                                class="input event-add-popup__input-event-name">
+                            <input type="text" name="date" placeholder="Month, Day"
+                                class="input event-add-popup__input-date" readonly>
+                            <input type="text" name="members" placeholder="Members name"
+                                class="input event-add-popup__input-members">
+                            <textarea name="description" cols="30" rows="10" placeholder="Describe"
+                                class="input event-add-popup__input-description"></textarea>
+                        </form>
+                        <div class="popup-buttons">
+                            <button class="button extra-button popup-add__button-done">Done</button>
+                            <button class="button extra-button popup-add__button-delete">Delete</button>
                         </div>
                     </div>
-                    <textarea name="description" cols="30" rows="10" placeholder="Describe"
-                        class="input event-overview-popup__input-description" readonly = "readonly"></textarea>
-                    <div class="popup-buttons">
-                        <button class="button extra-button event-overview-popup__button-done">Done</button>
-                        <button class="button extra-button event-overview-popup__button-delete">Delete</button>
-                        <button class="button extra-button event-overview-popup__button-edit">Edit</button>
+                </div>
+
+                <div class="event-overview-popup-container popup-container">
+                    <div class="popups event-overview-popup">
+                        <div class="popups__decoration popups__decoration-event-overview"></div>
+                        <div class="icon close-icon event-overview-popup__close"></div>
+                        <div class="event-overview-popup__description">
+                            <p class="month-text event-overview-popup__event-title"></p>
+                            <p class="input-text event-overview-popup__event-date"></p>
+                            <div class="members">
+                                <p class="input-text-add event-overview-popup__members-title">Members:</p>
+                                <p class="button-title-text event-overview-popup__members-text"></p>
+                            </div>
+                        </div>
+                        <textarea name="description" cols="30" rows="10" placeholder="Describe"
+                            class="input event-overview-popup__input-description" readonly="readonly"></textarea>
+                        <div class="popup-buttons">
+                            <button class="button extra-button event-overview-popup__button-done">Done</button>
+                            <button class="button extra-button event-overview-popup__button-delete">Delete</button>
+                            <button class="button extra-button event-overview-popup__button-edit">Edit</button>
+                        </div>
                     </div>
                 </div>
+
+                
             </div>
 
         </div>

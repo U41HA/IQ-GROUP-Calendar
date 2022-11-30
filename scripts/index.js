@@ -13,7 +13,7 @@ function showMonth() {
     const prevMonthButton = document.querySelector('.date-navbar__slide-left');
     const todayButton = document.querySelector('.date-navbar__button');
     const refreshButton = document.querySelector('.buttons__refresh')
-    
+
     refreshButton.addEventListener('click', refreshApp);
     todayButton.addEventListener('click', goToday);
     nextMonthButton.addEventListener('click', nextMonth);
@@ -164,6 +164,7 @@ function quickAddPopupShow() {
                     daysCell[i].children[1].innerHTML = cellDescription;
                     daysCell[i].children[2].innerHTML = cellMembers;
                     daysCell[i].classList.add('day-filled');
+                    searchListPush();
                     setLocaleStorage(i);
                 }
             }
@@ -171,6 +172,23 @@ function quickAddPopupShow() {
             function setLocaleStorage(i) {
                 let daySaved = daysCell[i].innerHTML;
                 localStorage.setItem(`${cellDate}`, daySaved);
+            }
+
+            function searchListPush() {
+                let searchItem = document.createElement('li');
+                searchItem.className = 'event-search-popup__item';
+
+                let searchItemTitle = document.createElement('p');
+                searchItemTitle.className = 'menu-title-text event-search-popup__item-title';
+                searchItemTitle.textContent = cellDescription;
+
+                let searchItemDescription = document.createElement('p');
+                searchItemDescription.className = 'menu-date-text event-search-popup__item-description';
+                searchItemDescription.textContent = cellDate;
+
+                searchItem.append(searchItemTitle);
+                searchItem.append(searchItemDescription);
+                searchList.append(searchItem);
             }
         }
     }
@@ -238,6 +256,7 @@ function addOrOverviewEvent() {
             thisDay.classList.add('day-filled');
             buttonDelete.removeAttribute('disabled', 'disabled');
             setLocaleStorage(thisDay);
+            searchListPush(thisDay);
             resetInput();
             addPopupRemove();
         }
@@ -312,6 +331,7 @@ function addOrOverviewEvent() {
         }
 
         function deleteEvent() {
+            searchListRemove(thisDay);
             thisDay.querySelector('.cell-title-text').textContent = '';
             thisDay.querySelector('.cell-description-text').textContent = '';
             thisDay.querySelector('.event-description').textContent = '';
@@ -371,10 +391,121 @@ function addOrOverviewEvent() {
     function localeStorageEventRemove(thisDay) {
         localStorage.removeItem(`${thisDay.querySelector('.full-day').textContent}`);
     }
+
+    function searchListPush(thisDay) {
+        let eventTitle = thisDay.querySelector('.cell-title-text').textContent;
+        let eventDate = thisDay.querySelector('.full-day').textContent;
+        let eventMembers = thisDay.querySelector('.cell-description-text').textContent;
+        let eventDescription = thisDay.querySelector('.event-description').textContent;
+
+        let searchItem = document.createElement('li');
+        searchItem.className = `event-search-popup__item ${eventDate.split(' ').join('')}`;
+
+        let searchItemTitle = document.createElement('p');
+        searchItemTitle.className = 'menu-title-text event-search-popup__item-title search__title';
+        searchItemTitle.textContent = eventTitle;
+
+        let searchItemDate = document.createElement('p');
+        searchItemDate.className = 'menu-date-text event-search-popup__item-description search__date';
+        searchItemDate.textContent = eventDate;
+
+        let searchItemDescription = document.createElement('p');
+        searchItemDescription.className = `event-description text-hidden search__description`;
+        searchItemDescription.textContent = eventDescription;
+
+        let searchItemMembers = document.createElement('p');
+        searchItemMembers.className = `event-members text-hidden search__members`;
+        searchItemMembers.textContent = eventMembers;
+
+        searchItem.append(searchItemTitle);
+        searchItem.append(searchItemDate);
+        searchItem.append(searchItemDescription);
+        searchItem.append(searchItemMembers);
+        searchList.append(searchItem);
+    }
+
+    function searchListRemove(thisDay) {
+        let deletedEventDate = thisDay.querySelector('.full-day').textContent.split(' ').join('');
+        let allEvents = document.querySelectorAll('.event-search-popup__item');
+        for (let i = 0; i < allEvents.length; i++) {
+            if (allEvents[i].classList.contains(deletedEventDate)) {
+                allEvents[i].remove();
+            }
+        }
+    }
+}
+
+// event-search-popup-container
+const searchInput = document.querySelector('.search__input');
+const searchList = document.querySelector('.event-search-popup__list');
+searchInput.addEventListener('click', searchPopupShow);
+
+function searchPopupShow() {
+    const eventSearchPopup = document.querySelector('.event-search-popup-container');
+    let searchArr = document.querySelectorAll('.event-search-popup__item');
+    
+    document.addEventListener('click', bodyClosePopup, true);
+    searchInput.addEventListener('input', searchEvent);
+    searchInput.removeEventListener('click', searchPopupShow);
+
+    if (!searchList.firstElementChild) {return};
+
+    if (!eventSearchPopup.classList.contains('active')) {
+        eventSearchPopup.classList.add('active');
+    }
+
+    function eventSearchPopupRemove() {
+        if (eventSearchPopup.classList.contains('active')) {
+            eventSearchPopup.classList.remove('active');
+        }
+        searchInput.removeEventListener('input', searchEvent);
+        document.removeEventListener('click', bodyClosePopup, true);
+        searchInput.addEventListener('click', searchPopupShow);
+    }
+
+    function bodyClosePopup(e) {
+        let popupClick = e.composedPath().includes(eventSearchPopup);
+        if (!popupClick) {
+            eventSearchPopupRemove();
+        }
+    }  
+
+    function searchEvent() {
+        let searchQuery = searchInput.value.toLowerCase();
+
+        for (let i = 0; i < searchArr.length; i++) {
+            let titleSearch = searchArr[i].querySelector('.search__title').textContent.toLowerCase();
+            let dateSearch = searchArr[i].querySelector('.search__date').textContent.toLowerCase();
+            let descriptionSearch = searchArr[i].querySelector('.search__description').textContent.toLowerCase();
+            let membersSearch = searchArr[i].querySelector('.search__members').textContent.toLowerCase();
+
+            searchArr[i].classList.remove('hidden');
+            
+            if (!titleSearch.includes(searchQuery) && !dateSearch.includes(searchQuery) && !descriptionSearch.includes(searchQuery) && !membersSearch.includes(searchQuery)) {
+                searchArr[i].classList.add('hidden');
+            }
+        }
+    }
 }
 
 
-// LocalStorage
 
 
 
+
+
+
+
+
+// Saving search field
+function setLocaleStorageSearchList() {
+    localStorage.setItem('searchList', searchList.innerHTML);
+}
+
+function getLocaleStorageSearchList() {
+    if (localStorage.searchList) {
+        searchList.innerHTML = localStorage.getItem('searchList');
+    }
+}
+window.addEventListener('beforeunload', setLocaleStorageSearchList);
+window.addEventListener('load', getLocaleStorageSearchList);
