@@ -2,8 +2,8 @@ import {showMonth} from './functions/showMonth.js';
 import {quickAddPopupShow} from './functions/quickAddPopupShow.js';
 import {addOrOverviewEvent} from './functions/addOrOverviewEvent.js';
 import {searchPopupShow} from './functions/searchPopupShow.js';
-// import {setLocaleStorageSearchList} from './functions/setLocaleStorageSearchList.js';
-// import {getLocaleStorageSearchList} from './functions/getLocaleStorageSearchList.js';
+import {setLocaleStorageSearchList} from './functions/setLocaleStorageSearchList.js';
+import {getLocaleStorageSearchList} from './functions/getLocaleStorageSearchList.js';
 import {setActiveDay} from './functions/setActiveDay.js';
 
 (function initApp() {
