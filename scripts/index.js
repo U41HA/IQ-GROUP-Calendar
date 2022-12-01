@@ -2,7 +2,8 @@
 const monthOutput = document.querySelector('.date-navbar__month');
 const daysCell = document.querySelectorAll('.day');
 const monthYearOptions = { month: 'long', year: 'numeric', };
-const monthOptions = { month: 'long', }
+const monthOptions = { month: 'long', };
+const dayOption = { month: 'long', day: 'numeric', };
 let date = new Date();
 
 function showMonth() {
@@ -49,9 +50,19 @@ function showMonth() {
         date.setDate(date.getDate() + 1);
     }
 
-    dateReset();
+    setToday();
 
     getLocalStorage();
+
+    function setToday() {
+        date = new Date();
+        for (let i = 0; i < daysCell.length; i++) {
+            daysCell[i].classList.remove('today');
+            if (daysCell[i].lastElementChild.textContent == date.toLocaleDateString('en-US', dayOption)) {
+                daysCell[i].classList.add('today')
+            }
+        }
+    }
 
 
     function getLocalStorage() {
@@ -148,7 +159,7 @@ function quickAddPopupShow() {
         if (quickAddPopupInput.value) {
             const cell = quickAddPopupInput.value.split(',');
             let cellDate = cell[0];
-            let cellDescription = cell[1];
+            let cellTitle = cell[1];
             let cellMembersArr = [];
 
             quickAddPopupInput.value = '';
@@ -161,7 +172,7 @@ function quickAddPopupShow() {
             const dayList = document.querySelectorAll('.full-day');
             for (let i = 0; i < dayList.length; i++) {
                 if (dayList[i].textContent === cellDate) {
-                    daysCell[i].children[1].innerHTML = cellDescription;
+                    daysCell[i].children[1].innerHTML = cellTitle;
                     daysCell[i].children[2].innerHTML = cellMembers;
                     daysCell[i].classList.add('day-filled');
                     searchListPush();
@@ -175,20 +186,40 @@ function quickAddPopupShow() {
             }
 
             function searchListPush() {
+                let searchItems = document.querySelectorAll('.event-search-popup__item');
+
                 let searchItem = document.createElement('li');
-                searchItem.className = 'event-search-popup__item';
+                searchItem.className = `event-search-popup__item ${cellDate.split(' ').join('')}`;
 
                 let searchItemTitle = document.createElement('p');
-                searchItemTitle.className = 'menu-title-text event-search-popup__item-title';
-                searchItemTitle.textContent = cellDescription;
+                searchItemTitle.className = 'menu-title-text event-search-popup__item-title search__title';
+                searchItemTitle.textContent = cellTitle;
+
+                let searchItemDate = document.createElement('p');
+                searchItemDate.className = 'menu-date-text event-search-popup__item-description search__date';
+                searchItemDate.textContent = cellDate;
 
                 let searchItemDescription = document.createElement('p');
-                searchItemDescription.className = 'menu-date-text event-search-popup__item-description';
-                searchItemDescription.textContent = cellDate;
+                searchItemDescription.className = `event-description text-hidden search__description`;
+                searchItemDescription.textContent = '';
+
+                let searchItemMembers = document.createElement('p');
+                searchItemMembers.className = `event-members text-hidden search__members`;
+                searchItemMembers.textContent = cellMembers;
 
                 searchItem.append(searchItemTitle);
+                searchItem.append(searchItemDate);
                 searchItem.append(searchItemDescription);
-                searchList.append(searchItem);
+                searchItem.append(searchItemMembers);
+
+                for (let i = 0; i <= searchItems.length; i++) {
+                    if (searchItems[i] && searchItem.querySelector('.search__date').textContent == searchItems[i].querySelector('.search__date').textContent) {
+                        searchItems[i].remove();
+                        searchList.append(searchItem);
+                    } else {
+                        searchList.append(searchItem);
+                    }
+                }
             }
         }
     }

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="assets/icons/calendar-favicon.svg" type="image/x-icon">
     <title>Calendar</title>
 </head>
 
@@ -19,7 +20,7 @@
                 <button class="buttons__add button main-button">Add</button>
                 <button class="buttons__refresh button main-button">Refresh</button>
             </div>
-            <form action="" class="search">
+            <form action="javascript:void(0);" class="search">
                 <span class="search__icon"></span>
                 <input type="search" class="input search__input" placeholder="Search your events">
             </form>
@@ -41,16 +42,15 @@
                     </ul>
                 </div>
             </div>
-
         </div>
     </header>
     <main>
         <section class="date">
             <div class="wrapper date__wrapper">
                 <nav class="date-navbar">
-                    <span class="date-navbar__slide date-navbar__slide-left"></span>
-                    <p class="month-text date-navbar__month"></p>
-                    <span class="date-navbar__slide date-navbar__slide-right"></span>
+                    <button class="button date-navbar__slide date-navbar__slide-left"></button>
+                    <h2 class="month-text date-navbar__month"></h2>
+                    <button class="button date-navbar__slide date-navbar__slide-right"></button>
                 </nav>
                 <div class="date-navbar__button-container">
                     <button class="button extra-button date-navbar__button">Today</button>
@@ -367,6 +367,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
 
         <div class="popups-area">
@@ -375,7 +376,7 @@
                     <div class="popups event-add-popup">
                         <div class="popups__decoration popups__decoration-event-add"></div>
                         <div class="icon close-icon event-add-popup__close"></div>
-                        <form action class="event-add-popup__form">
+                        <form action="javascript:void(0);" class="event-add-popup__form">
                             <input type="text" name="event-name" placeholder="Event"
                                 class="input event-add-popup__input-event-name">
                             <input type="text" name="date" placeholder="Month, Day"

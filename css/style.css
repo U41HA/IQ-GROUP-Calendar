@@ -777,10 +777,12 @@ html {
 .day.active {
   box-shadow: 0px 0px 10px 2px #27A1FF;
   transition: box-shadow 0.3s;
+  z-index: 2;
 }
 .day:hover {
   background-color: #F4F4F4;
   transition: background-color 0.3s;
+  cursor: pointer;
 }
 .day:active {
   box-shadow: 0px 0px 10px 2px #27A1FF;
@@ -792,4 +794,10 @@ html {
 .day-filled:hover {
   background-color: #27A1FF;
   transition: background-color 0.3s;
+}
+.day.today {
+  box-shadow: inset 0px 0px 15px 2px #C2E4FE;
+}
+.day.today:hover {
+  box-shadow: none;
 }/*# sourceMappingURL=style.css.map */

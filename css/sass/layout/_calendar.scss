@@ -39,11 +39,13 @@
     &.active {
         box-shadow: 0px 0px 10px 2px $color-blue-200;
         transition: box-shadow 0.3s;
+        z-index: 2;
     }
     
     &:hover {
         background-color: $color-neutral-100;
         transition: background-color 0.3s;
+        cursor: pointer;
     }
 
     &:active {
@@ -57,6 +59,14 @@
         &:hover {
             background-color: $color-blue-200;
             transition: background-color 0.3s;
+        }
+    }
+
+    &.today {
+        box-shadow: inset 0px 0px 15px 2px $color-blue-100;
+
+        &:hover {
+            box-shadow: none;
         }
     }
 
