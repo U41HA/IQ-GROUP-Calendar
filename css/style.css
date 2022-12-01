@@ -538,7 +538,7 @@ html {
   height: 10px;
   background-color: #FFFFFF;
   position: absolute;
-  z-index: 4;
+  z-index: 2;
 }
 
 .popup-buttons {
