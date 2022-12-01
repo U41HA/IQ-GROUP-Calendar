@@ -4,9 +4,9 @@ export function quickAddPopupShow() {
     const closeButton = document.querySelector('.event-quick-add__close');
     const createButton = document.querySelector('.button-done');
 
-    // Global variables
     const daysCell = document.querySelectorAll('.day');
     const searchList = document.querySelector('.event-search-popup__list');
+    const quickAddPopupInput = document.querySelector('.event-quick-add-popup__input');
 
     createButton.addEventListener('click', eventQuickAdd);
     closeButton.addEventListener('click', quickAddPopupRemove);
@@ -16,32 +16,33 @@ export function quickAddPopupShow() {
         quickAddPopup.classList.add('active');
     }
 
-    function quickAddPopupRemove() {
-        if (quickAddPopup.classList.contains('active')) {
-            quickAddPopup.classList.remove('active');
-        }
-        closeButton.removeEventListener('click', quickAddPopupRemove);
-        createButton.removeEventListener('click', eventQuickAdd);
-        document.removeEventListener('click', bodyClosePopup, true);
-        createButton.removeEventListener('click', eventQuickAdd);
-    }
-
-    function bodyClosePopup(e) {
-        let popupClick = e.composedPath().includes(quickAddPopup);
-        if (!popupClick) {
-            quickAddPopupRemove();
-        }
-    }
-
     function eventQuickAdd() {
-        const quickAddPopupInput = document.querySelector('.event-quick-add-popup__input');
+        
         if (quickAddPopupInput.value) {
+            // Add validation arrays
+            const monthValidation = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+            const dayValidation = [];
+            for (let i = 1; i <= 31; i++) {
+                dayValidation.push(`${i}`);
+            }
+
+            // Get input value
             const cell = quickAddPopupInput.value.split(',');
-            const cellDate = `${cell[0][0].toUpperCase()}${cell[0].slice(1)}`;
+
+            // Validation of entered date
+            const cellDate = () => {
+                if (monthValidation.includes(cell[0].split(' ')[0].toLowerCase()) && dayValidation.includes(cell[0].split(' ')[1])) {
+                    return `${cell[0][0].toUpperCase()}${cell[0].slice(1)}`
+                } else {
+                    quickAddPopupInput.value = '';
+                    alert('Please, enter correct date in "December 26" format\nYou also can enter Event Title and Event Member separated by commas\nLike this: "December 12, My Birthday, Rick, Morty, Alex"');
+                    return;
+                }
+            };
+            if (!cellDate()) {return}
+
             const cellTitle = cell[1];
             const cellMembersArr = [];
-
-            quickAddPopupInput.value = '';
 
             for (let i = 2; i < cell.length; i++) {
                 cellMembersArr.push(cell[i]);
@@ -50,40 +51,42 @@ export function quickAddPopupShow() {
 
             const dayList = document.querySelectorAll('.full-day');
             for (let i = 0; i < dayList.length; i++) {
-                if (dayList[i].textContent === cellDate) {
+                if (dayList[i].textContent === cellDate()) {
                     daysCell[i].querySelector('.cell-title-text').innerHTML = cellTitle;
                     daysCell[i].querySelector('.cell-description-text').innerHTML = cellMembers;
                     daysCell[i].querySelector('.event-description').innerHTML = '';
                     daysCell[i].classList.add('day-filled');
                     searchListPush();
                     setLocaleStorage(i);
+                    quickAddPopupRemove();
+                    break;
                 }
             }
 
             function setLocaleStorage(i) {
                 const daySaved = daysCell[i].innerHTML;
-                localStorage.setItem(`${cellDate}`, daySaved);
+                localStorage.setItem(`${cellDate()}`, daySaved);
             }
 
             function searchListPush() {
                 const searchItems = document.querySelectorAll('.event-search-popup__item');
 
-                let searchItem = document.createElement('li');
-                searchItem.className = `event-search-popup__item ${cellDate.split(' ').join('')}`;
+                const searchItem = document.createElement('li');
+                searchItem.className = `event-search-popup__item ${cellDate().split(' ').join('')}`;
 
-                let searchItemTitle = document.createElement('p');
+                const searchItemTitle = document.createElement('p');
                 searchItemTitle.className = 'menu-title-text event-search-popup__item-title search__title';
                 searchItemTitle.textContent = cellTitle;
 
-                let searchItemDate = document.createElement('p');
+                const searchItemDate = document.createElement('p');
                 searchItemDate.className = 'menu-date-text event-search-popup__item-description search__date';
-                searchItemDate.textContent = cellDate;
+                searchItemDate.textContent = cellDate();
 
-                let searchItemDescription = document.createElement('p');
+                const searchItemDescription = document.createElement('p');
                 searchItemDescription.className = `event-description text-hidden search__description`;
                 searchItemDescription.textContent = '';
 
-                let searchItemMembers = document.createElement('p');
+                const searchItemMembers = document.createElement('p');
                 searchItemMembers.className = `event-members text-hidden search__members`;
                 searchItemMembers.textContent = cellMembers;
 
@@ -101,6 +104,24 @@ export function quickAddPopupShow() {
                     }
                 }
             }
+        }
+    }
+
+    function quickAddPopupRemove() {
+        if (quickAddPopup.classList.contains('active')) {
+            quickAddPopup.classList.remove('active');
+        }
+        quickAddPopupInput.value = '';
+        closeButton.removeEventListener('click', quickAddPopupRemove);
+        createButton.removeEventListener('click', eventQuickAdd);
+        document.removeEventListener('click', bodyClosePopup, true);
+        createButton.removeEventListener('click', eventQuickAdd);
+    }
+
+    function bodyClosePopup(e) {
+        let popupClick = e.composedPath().includes(quickAddPopup);
+        if (!popupClick) {
+            quickAddPopupRemove();
         }
     }
 }

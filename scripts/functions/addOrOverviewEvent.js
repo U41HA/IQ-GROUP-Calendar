@@ -206,22 +206,22 @@ export function addOrOverviewEvent() {
         const eventMembers = thisDay.querySelector('.cell-description-text').textContent;
         const eventDescription = thisDay.querySelector('.event-description').textContent;
 
-        let searchItem = document.createElement('li');
+        const searchItem = document.createElement('li');
         searchItem.className = `event-search-popup__item ${eventDate.split(' ').join('')}`;
 
-        let searchItemTitle = document.createElement('p');
+        const searchItemTitle = document.createElement('p');
         searchItemTitle.className = 'menu-title-text event-search-popup__item-title search__title';
         searchItemTitle.textContent = eventTitle;
 
-        let searchItemDate = document.createElement('p');
+        const searchItemDate = document.createElement('p');
         searchItemDate.className = 'menu-date-text event-search-popup__item-description search__date';
         searchItemDate.textContent = eventDate;
 
-        let searchItemDescription = document.createElement('p');
+        const searchItemDescription = document.createElement('p');
         searchItemDescription.className = `event-description text-hidden search__description`;
         searchItemDescription.textContent = eventDescription;
 
-        let searchItemMembers = document.createElement('p');
+        const searchItemMembers = document.createElement('p');
         searchItemMembers.className = `event-members text-hidden search__members`;
         searchItemMembers.textContent = eventMembers;
 

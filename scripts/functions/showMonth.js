@@ -4,16 +4,14 @@ export function showMonth() {
         window.date = new Date();
     }
 
-    let currentMonth = date.getMonth();
-    let currentYear = date.getFullYear();
+    const currentMonth = date.getMonth();
+    const currentYear = date.getFullYear();
 
-    // Global variables
     const monthOutput = document.querySelector('.date-navbar__month');
     const daysCell = document.querySelectorAll('.day');
     const monthYearOptions = { month: 'long', year: 'numeric', };
     const monthOptions = { month: 'long', };
     const dayOption = { month: 'long', day: 'numeric', };
-
 
     const nextMonthButton = document.querySelector('.date-navbar__slide-right');
     const prevMonthButton = document.querySelector('.date-navbar__slide-left');
@@ -68,6 +66,8 @@ export function showMonth() {
             }
         }
     }
+
+    // Locale storage saving and loading 
 
     function getLocalStorage() {
         for (let i = 0; i < daysCell.length; i++) {

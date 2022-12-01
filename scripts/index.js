@@ -1,9 +1,22 @@
+// Initial function for day filling and listener adding
 import {showMonth} from './functions/showMonth.js';
+
+// Quick event add
 import {quickAddPopupShow} from './functions/quickAddPopupShow.js';
+
+// Overview existing event or add new 
 import {addOrOverviewEvent} from './functions/addOrOverviewEvent.js';
+
+// Search and moving through events
 import {searchPopupShow} from './functions/searchPopupShow.js';
+
+// Locale storage saving
 import {setLocaleStorageSearchList} from './functions/setLocaleStorageSearchList.js';
+
+// Locale storage loading
 import {getLocaleStorageSearchList} from './functions/getLocaleStorageSearchList.js';
+
+// Active day setting for event adding 
 import {setActiveDay} from './functions/setActiveDay.js';
 
 (function initApp() {
