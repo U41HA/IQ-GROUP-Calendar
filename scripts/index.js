@@ -11,11 +11,11 @@ import {setActiveDay} from './functions/setActiveDay.js';
     const addEventButton = document.querySelector('.buttons__add');
     const searchInput = document.querySelector('.search__input');
     
-    window.addEventListener('load', showMonth);
     daysCell.forEach(day => day.addEventListener('click', setActiveDay));
     daysCell.forEach(day => day.addEventListener('click', addOrOverviewEvent));
     addEventButton.addEventListener('click', quickAddPopupShow);
     searchInput.addEventListener('click', searchPopupShow);
-    window.addEventListener('beforeunload', setLocaleStorageSearchList);
+    window.addEventListener('load', showMonth);
     window.addEventListener('load', getLocaleStorageSearchList);
+    window.addEventListener('beforeunload', setLocaleStorageSearchList);
 })();

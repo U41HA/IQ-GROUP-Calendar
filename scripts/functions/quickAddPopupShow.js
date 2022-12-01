@@ -37,7 +37,7 @@ export function quickAddPopupShow() {
         const quickAddPopupInput = document.querySelector('.event-quick-add-popup__input');
         if (quickAddPopupInput.value) {
             const cell = quickAddPopupInput.value.split(',');
-            const cellDate = cell[0];
+            const cellDate = `${cell[0][0].toUpperCase()}${cell[0].slice(1)}`;
             const cellTitle = cell[1];
             const cellMembersArr = [];
 
@@ -51,8 +51,9 @@ export function quickAddPopupShow() {
             const dayList = document.querySelectorAll('.full-day');
             for (let i = 0; i < dayList.length; i++) {
                 if (dayList[i].textContent === cellDate) {
-                    daysCell[i].children[1].innerHTML = cellTitle;
-                    daysCell[i].children[2].innerHTML = cellMembers;
+                    daysCell[i].querySelector('.cell-title-text').innerHTML = cellTitle;
+                    daysCell[i].querySelector('.cell-description-text').innerHTML = cellMembers;
+                    daysCell[i].querySelector('.event-description').innerHTML = '';
                     daysCell[i].classList.add('day-filled');
                     searchListPush();
                     setLocaleStorage(i);

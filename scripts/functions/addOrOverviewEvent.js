@@ -3,8 +3,8 @@ export function addOrOverviewEvent() {
     const eventPreviewPopup = document.querySelector('.event-overview-popup-container');
 
     const thisDay = document.querySelector('.day.active');
-    let coordY = thisDay.offsetTop + 'px';
-    let coordX = thisDay.offsetLeft + thisDay.offsetWidth + 10 + 'px';
+    const coordY = thisDay.offsetTop + 'px';
+    const coordX = thisDay.offsetLeft + thisDay.offsetWidth + 10 + 'px';
 
 
     (!thisDay.classList.contains('day-filled')) ? addPopupShow() : addPopupOverviewShow();
