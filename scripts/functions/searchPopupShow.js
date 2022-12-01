@@ -57,8 +57,8 @@ export function searchPopupShow() {
 
     function goToEvent() {
         let date = new Date();
-        let currentYear = date.getFullYear();
-        let eventDate = this.querySelector('.search__date').textContent;
+        const currentYear = date.getFullYear();
+        const eventDate = this.querySelector('.search__date').textContent;
         date = new Date(`${currentYear}, ${eventDate}`);
         showMonth();
         for (let i = 0; i < daysCell.length; i++) {

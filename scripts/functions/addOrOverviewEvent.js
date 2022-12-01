@@ -2,7 +2,7 @@ export function addOrOverviewEvent() {
     const eventAddPopup = document.querySelector('.event-add-popup-container');
     const eventPreviewPopup = document.querySelector('.event-overview-popup-container');
 
-    let thisDay = document.querySelector('.day.active');
+    const thisDay = document.querySelector('.day.active');
     let coordY = thisDay.offsetTop + 'px';
     let coordX = thisDay.offsetLeft + thisDay.offsetWidth + 10 + 'px';
 
@@ -15,12 +15,12 @@ export function addOrOverviewEvent() {
         eventAddPopup.style.top = coordY;
         eventAddPopup.style.left = coordX;
         eventAddPopup.classList.add('active');
-        let thisDay = document.querySelector('.day.active');
+        const thisDay = document.querySelector('.day.active');
 
-        let popupEventTitle = document.querySelector('.event-add-popup__input-event-name');
-        let popupEventDescription = document.querySelector('.event-add-popup__input-description');
-        let popupEventMembers = document.querySelector('.event-add-popup__input-members');
-        let popupEventDate = document.querySelector('.event-add-popup__input-date');
+        const popupEventTitle = document.querySelector('.event-add-popup__input-event-name');
+        const popupEventDescription = document.querySelector('.event-add-popup__input-description');
+        const popupEventMembers = document.querySelector('.event-add-popup__input-members');
+        const popupEventDate = document.querySelector('.event-add-popup__input-date');
 
         const closeButton = document.querySelector('.event-add-popup__close');
         const buttonAdd = document.querySelector('.popup-add__button-done');
@@ -42,15 +42,15 @@ export function addOrOverviewEvent() {
 
 
         function addEvent() {
-            let thisDay = document.querySelector('.day.active');
+            const thisDay = document.querySelector('.day.active');
 
             thisDay.querySelector('.cell-title-text').textContent = popupEventTitle.value;
             thisDay.querySelector('.event-description').textContent = popupEventDescription.value;
             thisDay.querySelector('.cell-description-text').textContent = popupEventMembers.value;
 
-            let thisDayTitle = thisDay.querySelector('.cell-title-text').textContent;
-            let thisDayDescription = thisDay.querySelector('.event-description').textContent;
-            let thisDayMembers = thisDay.querySelector('.cell-description-text').textContent;
+            const thisDayTitle = thisDay.querySelector('.cell-title-text').textContent;
+            const thisDayDescription = thisDay.querySelector('.event-description').textContent;
+            const thisDayMembers = thisDay.querySelector('.cell-description-text').textContent;
 
             if (thisDayTitle || thisDayDescription || thisDayMembers) {
                 thisDay.classList.add('day-filled');
@@ -107,12 +107,13 @@ export function addOrOverviewEvent() {
         eventPreviewPopup.style.top = coordY;
         eventPreviewPopup.style.left = coordX;
         eventPreviewPopup.classList.add('active');
-        let thisDay = document.querySelector('.day.active');
 
-        let popupEventTitle = document.querySelector('.event-overview-popup__event-title');
-        let popupEventDescription = document.querySelector('.event-overview-popup__input-description');
-        let popupEventMembers = document.querySelector('.event-overview-popup__members-text');
-        let popupEventDate = document.querySelector('.event-overview-popup__event-date');
+        const thisDay = document.querySelector('.day.active');
+
+        const popupEventTitle = document.querySelector('.event-overview-popup__event-title');
+        const popupEventDescription = document.querySelector('.event-overview-popup__input-description');
+        const popupEventMembers = document.querySelector('.event-overview-popup__members-text');
+        const popupEventDate = document.querySelector('.event-overview-popup__event-date');
 
         const closeButton = document.querySelector('.event-overview-popup__close');
         const doneButton = document.querySelector('.event-overview-popup__button-done');
@@ -141,8 +142,8 @@ export function addOrOverviewEvent() {
             thisDay.querySelector('.event-description').textContent = '';
 
             popupEventTitle.textContent = '';
-            popupEventDate = '';
-            popupEventMembers = '';
+            popupEventDate.textContent = '';
+            popupEventMembers.textContent = '';
             popupEventDescription.value = '';
 
             thisDay.classList.remove('day-filled');
@@ -198,12 +199,12 @@ export function addOrOverviewEvent() {
 
     function searchListPush(thisDay) {
         const searchList = document.querySelector('.event-search-popup__list');
-        let searchItems = document.querySelectorAll('.event-search-popup__item');
+        const searchItems = document.querySelectorAll('.event-search-popup__item');
 
-        let eventTitle = thisDay.querySelector('.cell-title-text').textContent;
-        let eventDate = thisDay.querySelector('.full-day').textContent;
-        let eventMembers = thisDay.querySelector('.cell-description-text').textContent;
-        let eventDescription = thisDay.querySelector('.event-description').textContent;
+        const eventTitle = thisDay.querySelector('.cell-title-text').textContent;
+        const eventDate = thisDay.querySelector('.full-day').textContent;
+        const eventMembers = thisDay.querySelector('.cell-description-text').textContent;
+        const eventDescription = thisDay.querySelector('.event-description').textContent;
 
         let searchItem = document.createElement('li');
         searchItem.className = `event-search-popup__item ${eventDate.split(' ').join('')}`;
@@ -240,8 +241,8 @@ export function addOrOverviewEvent() {
     }
 
     function searchListRemove(thisDay) {
-        let deletedEventDate = thisDay.querySelector('.full-day').textContent.split(' ').join('');
-        let allEvents = document.querySelectorAll('.event-search-popup__item');
+        const deletedEventDate = thisDay.querySelector('.full-day').textContent.split(' ').join('');
+        const allEvents = document.querySelectorAll('.event-search-popup__item');
         for (let i = 0; i < allEvents.length; i++) {
             if (allEvents[i].classList.contains(deletedEventDate)) {
                 allEvents[i].remove();

@@ -37,16 +37,16 @@ export function quickAddPopupShow() {
         const quickAddPopupInput = document.querySelector('.event-quick-add-popup__input');
         if (quickAddPopupInput.value) {
             const cell = quickAddPopupInput.value.split(',');
-            let cellDate = cell[0];
-            let cellTitle = cell[1];
-            let cellMembersArr = [];
+            const cellDate = cell[0];
+            const cellTitle = cell[1];
+            const cellMembersArr = [];
 
             quickAddPopupInput.value = '';
 
             for (let i = 2; i < cell.length; i++) {
                 cellMembersArr.push(cell[i]);
             }
-            let cellMembers = cellMembersArr.join(', ');
+            const cellMembers = cellMembersArr.join(', ');
 
             const dayList = document.querySelectorAll('.full-day');
             for (let i = 0; i < dayList.length; i++) {
@@ -60,12 +60,12 @@ export function quickAddPopupShow() {
             }
 
             function setLocaleStorage(i) {
-                let daySaved = daysCell[i].innerHTML;
+                const daySaved = daysCell[i].innerHTML;
                 localStorage.setItem(`${cellDate}`, daySaved);
             }
 
             function searchListPush() {
-                let searchItems = document.querySelectorAll('.event-search-popup__item');
+                const searchItems = document.querySelectorAll('.event-search-popup__item');
 
                 let searchItem = document.createElement('li');
                 searchItem.className = `event-search-popup__item ${cellDate.split(' ').join('')}`;

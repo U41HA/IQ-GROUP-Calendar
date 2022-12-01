@@ -412,6 +412,24 @@ html {
   font-weight: 400;
 }
 
+.mobile-text-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.mobile-text-subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #FFFFFF;
+}
+
+.mobile-text {
+  font-size: 1.4rem;
+  font-weight: 100;
+  color: #FFFFFF;
+}
+
 .button {
   font-size: 1.2rem;
   font-weight: 400;
@@ -800,4 +818,39 @@ html {
 }
 .day.today:hover {
   box-shadow: none;
+}
+
+@media (max-width: 1023px) {
+  main, header {
+    display: none;
+  }
+}
+
+.mobile-view-container {
+  display: none;
+  background: linear-gradient(45deg, rgb(39, 161, 255), rgb(194, 228, 254));
+}
+@media (max-width: 1023px) {
+  .mobile-view-container {
+    display: block;
+  }
+}
+
+.mobile-view {
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.mobile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+.mobile-container > * {
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */

@@ -36,3 +36,17 @@
     @include font(0rem);
 }
 
+.mobile-text-title {
+    @include font (2.4rem, 500);
+    color: $color-light-100;
+}
+
+.mobile-text-subtitle {
+    @include font (1.8rem, 300);
+    color: $color-light-100;
+}
+.mobile-text {
+    @include font (1.4rem, 100);
+    color: $color-light-100;
+}
+
