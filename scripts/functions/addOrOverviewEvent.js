@@ -52,17 +52,19 @@ export function addOrOverviewEvent() {
             const thisDayDescription = thisDay.querySelector('.event-description').textContent;
             const thisDayMembers = thisDay.querySelector('.cell-description-text').textContent;
 
-            if (thisDayTitle || thisDayDescription || thisDayMembers) {
-                thisDay.classList.add('day-filled');
-                buttonDelete.removeAttribute('disabled', 'disabled');
-                setLocaleStorage(thisDay);
-                searchListPush(thisDay);
-                resetInput();
-                addPopupRemove();
-            } else {
-                resetInput();
-                addPopupRemove();
-            }
+            (function addIfFilled() {
+                if (thisDayTitle || thisDayDescription || thisDayMembers) {
+                    thisDay.classList.add('day-filled');
+                    buttonDelete.removeAttribute('disabled', 'disabled');
+                    setLocaleStorage(thisDay);
+                    searchListPush(thisDay);
+                    resetInput();
+                    addPopupRemove();
+                } else {
+                    resetInput();
+                    addPopupRemove();
+                }
+            })();
         }
 
         function resetInput() {
@@ -126,14 +128,13 @@ export function addOrOverviewEvent() {
         doneButton.addEventListener('click', overviewPopupRemove);
         document.addEventListener('click', bodyClosePopup, true);
 
-        fillPopup();
-
-        function fillPopup() {
+        
+        (function fillPopup() {
             popupEventTitle.textContent = thisDay.querySelector('.cell-title-text').textContent;
             popupEventDate.textContent = thisDay.querySelector('.full-day').textContent;
             popupEventMembers.textContent = thisDay.querySelector('.cell-description-text').textContent;
             popupEventDescription.value = thisDay.querySelector('.event-description').textContent
-        }
+        })();
 
         function deleteEvent() {
             searchListRemove(thisDay);
