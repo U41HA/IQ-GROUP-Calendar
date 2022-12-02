@@ -60,22 +60,22 @@ export function searchPopupShow() {
         const currentYear = date.getFullYear();
         const eventDate = this.querySelector('.search__date').textContent;
         date = new Date(`${currentYear}, ${eventDate}`);
-        showMonth();
+        showMonth(date);
         for (let i = 0; i < daysCell.length; i++) {
             if (daysCell[i].querySelector('.full-day').textContent === eventDate) {
                 daysCell[i].click();
             }
         }
     }
+    
+    function showMonth(setedDate) {
 
-    function showMonth() {
-
-        if (typeof date == 'undefined') {
-            window.date = new Date();
+        if (typeof setedDate == 'undefined') {
+            window.setedDate = new Date();
         }
     
-        let currentMonth = date.getMonth();
-        let currentYear = date.getFullYear();
+        let currentMonth = setedDate.getMonth();
+        let currentYear = setedDate.getFullYear();
     
         // Global variables
         const monthOutput = document.querySelector('.date-navbar__month');
@@ -88,22 +88,20 @@ export function searchPopupShow() {
         const nextMonthButton = document.querySelector('.date-navbar__slide-right');
         const prevMonthButton = document.querySelector('.date-navbar__slide-left');
         const todayButton = document.querySelector('.date-navbar__button');
-        const refreshButton = document.querySelector('.buttons__refresh')
-    
-        refreshButton.addEventListener('click', refreshApp);
+
         todayButton.addEventListener('click', goToday);
         nextMonthButton.addEventListener('click', nextMonth);
         prevMonthButton.addEventListener('click', prevMonth);
     
-        monthOutput.textContent = date.toLocaleDateString('en-US', monthYearOptions);
+        monthOutput.textContent = setedDate.toLocaleDateString('en-US', monthYearOptions);
     
         function dateReset() {
-            date = new Date(currentYear, currentMonth);
-            date.setDate(1);
+            setedDate = new Date(currentYear, currentMonth);
+            setedDate.setDate(1);
         }
     
         function dayOfWeek() {
-            let dayOfWeek = date.getDay();
+            let dayOfWeek = setedDate.getDay();
             if (dayOfWeek === 0) dayOfWeek += 7;
             return dayOfWeek;
         }
@@ -112,17 +110,17 @@ export function searchPopupShow() {
     
         for (let i = dayOfWeek() - 2; i >= 0; i--) {
             if (i < 0) i += 7;
-            date.setDate(date.getDate() - 1);
-            daysCell[i].firstElementChild.firstElementChild.textContent = date.getDate();
-            daysCell[i].lastElementChild.textContent = `${date.toLocaleDateString('en-US', monthOptions)} ${date.getDate()}`;
+            setedDate.setDate(setedDate.getDate() - 1);
+            daysCell[i].firstElementChild.firstElementChild.textContent = setedDate.getDate();
+            daysCell[i].lastElementChild.textContent = `${setedDate.toLocaleDateString('en-US', monthOptions)} ${setedDate.getDate()}`;
         }
     
         dateReset();
     
         for (let i = dayOfWeek() - 1; i < daysCell.length; i++) {
-            daysCell[i].firstElementChild.firstElementChild.textContent = date.getDate();
-            daysCell[i].lastElementChild.textContent = `${date.toLocaleDateString('en-US', monthOptions)} ${date.getDate()}`;
-            date.setDate(date.getDate() + 1);
+            daysCell[i].firstElementChild.firstElementChild.textContent = setedDate.getDate();
+            daysCell[i].lastElementChild.textContent = `${setedDate.toLocaleDateString('en-US', monthOptions)} ${setedDate.getDate()}`;
+            setedDate.setDate(setedDate.getDate() + 1);
         }
     
         setToday();
@@ -165,15 +163,15 @@ export function searchPopupShow() {
     
         function nextMonth() {
             dateReset();
-            date.setMonth(date.getMonth() + 1);
-            monthOutput.textContent = date.toLocaleDateString('en-US', monthYearOptions);
+            setedDate.setMonth(date.getMonth() + 1);
+            monthOutput.textContent = setedDate.toLocaleDateString('en-US', monthYearOptions);
             showMonth();
         }
     
         function prevMonth() {
             dateReset();
-            date.setMonth(date.getMonth() - 1);
-            monthOutput.textContent = date.toLocaleDateString('en-US', monthYearOptions);
+            setedDate.setMonth(date.getMonth() - 1);
+            monthOutput.textContent = setedDate.toLocaleDateString('en-US', monthYearOptions);
             showMonth();
         }
     
@@ -181,14 +179,7 @@ export function searchPopupShow() {
     
         function goToday() {
             date = new Date();
-            showMonth();
+            showMonth(date);
         }
-    
-        // Refresh button
-    
-        function refreshApp() {
-            location.reload();
-        }
-    
     }
 }

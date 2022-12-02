@@ -60,12 +60,26 @@ export function quickAddPopupShow() {
                     setLocaleStorage(i);
                     quickAddPopupRemove();
                     break;
+                } else {
+                    searchListPush();
+                    setLocaleStorageLast();
+                    quickAddPopupRemove();
                 }
             }
 
             function setLocaleStorage(i) {
                 const daySaved = daysCell[i].innerHTML;
                 localStorage.setItem(`${cellDate()}`, daySaved);
+            }
+
+            function setLocaleStorageLast() {
+                let daySaved = 
+                `<p class="cell-date-text"><span>${cellDate().split(' ')[1]}</span></p>
+                <p class="cell-title-text"> ${cellTitle}</p>
+                <p class="cell-description-text"> ${cellMembers}</p>
+                <p class="text-hidden event-description"></p>
+                <p class="text-hidden full-day">${cellDate()}</p>`
+                localStorage.setItem(`${cellDate()}`, daySaved)
             }
 
             function searchListPush() {

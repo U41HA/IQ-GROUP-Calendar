@@ -16,9 +16,7 @@ export function showMonth() {
     const nextMonthButton = document.querySelector('.date-navbar__slide-right');
     const prevMonthButton = document.querySelector('.date-navbar__slide-left');
     const todayButton = document.querySelector('.date-navbar__button');
-    const refreshButton = document.querySelector('.buttons__refresh')
 
-    refreshButton.addEventListener('click', refreshApp);
     todayButton.addEventListener('click', goToday);
     nextMonthButton.addEventListener('click', nextMonth);
     prevMonthButton.addEventListener('click', prevMonth);
@@ -112,11 +110,4 @@ export function showMonth() {
         date = new Date();
         showMonth();
     }
-
-    // Refresh button
-
-    function refreshApp() {
-        location.reload();
-    }
-
 }

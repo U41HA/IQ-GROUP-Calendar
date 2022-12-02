@@ -605,7 +605,7 @@ html {
   width: 276px;
 }
 
-.popups__decoration-event-quick-add, .popups__decoration-event-search {
+.popups__decoration-event-quick-add, .popups__decoration-event-search, .popups__decoration-coming-event {
   transform: rotate(45deg);
   top: -5px;
   left: 23px;
@@ -652,7 +652,12 @@ html {
   right: 12px;
 }
 
-.event-search-popup {
+.event-coming-popup-container {
+  top: 90px;
+  left: 68px;
+}
+
+.event-search-popup, .event-coming-popup {
   padding: 4px;
   max-height: 192px;
   min-width: 187px;
@@ -660,7 +665,7 @@ html {
   overflow-y: scroll;
 }
 
-.event-search-popup__list {
+.event-search-popup__list, .event-coming-popup__list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -684,6 +689,20 @@ html {
 
 .event-search-popup__item-title {
   margin-bottom: 6px;
+}
+
+.event-coming-popup__title {
+  text-align: center;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #27A1FF;
+}
+
+.popups__decoration-coming-event {
+  z-index: 4;
+}
+
+.coming-event-text {
+  padding-left: 6px;
 }
 
 ::-webkit-scrollbar {

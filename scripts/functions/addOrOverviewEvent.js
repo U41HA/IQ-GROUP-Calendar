@@ -137,6 +137,7 @@ export function addOrOverviewEvent() {
 
         function deleteEvent() {
             searchListRemove(thisDay);
+            comingListRemove(thisDay);
             thisDay.querySelector('.cell-title-text').textContent = '';
             thisDay.querySelector('.cell-description-text').textContent = '';
             thisDay.querySelector('.event-description').textContent = '';
@@ -243,6 +244,17 @@ export function addOrOverviewEvent() {
     function searchListRemove(thisDay) {
         const deletedEventDate = thisDay.querySelector('.full-day').textContent.split(' ').join('');
         const allEvents = document.querySelectorAll('.event-search-popup__item');
+        for (let i = 0; i < allEvents.length; i++) {
+            if (allEvents[i].classList.contains(deletedEventDate)) {
+                allEvents[i].remove();
+            }
+        }
+    }
+
+    function comingListRemove(thisDay) {
+        const deletedEventDate = thisDay.querySelector('.full-day').textContent.split(' ').join('');
+        const comingEventList = document.querySelector('.event-coming-popup__list');
+        const allEvents = comingEventList.querySelectorAll('.event-search-popup__item');
         for (let i = 0; i < allEvents.length; i++) {
             if (allEvents[i].classList.contains(deletedEventDate)) {
                 allEvents[i].remove();

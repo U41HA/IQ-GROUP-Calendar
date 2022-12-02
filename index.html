@@ -18,7 +18,7 @@
         <div class="wrapper header__wrapper">
             <div class="buttons-container">
                 <button class="buttons__add button main-button">Add</button>
-                <button class="buttons__refresh button main-button">Refresh</button>
+                <button class="buttons__coming button main-button">Coming events</button>
             </div>
             <form action="javascript:void(0);" class="search">
                 <span class="search__icon"></span>
@@ -28,15 +28,19 @@
                 <div class="popups quick-add-popup">
                     <div class="popups__decoration popups__decoration-event-quick-add"></div>
                     <div class="close-icon event-quick-add__close"></div>
-                    <input 
-                    type="text" 
-                    name="event-name" 
-                    placeholder="November 25, Adventure, Rick Sanchez"
-                    class="input event-quick-add-popup__input"
-                    >
+                    <input type="text" name="event-name" placeholder="November 25, Adventure, Rick Sanchez"
+                        class="input event-quick-add-popup__input">
                     <div class="popup-buttons">
                         <button class="button extra-button button-done">Create</button>
                     </div>
+                </div>
+            </div>
+            <div class="event-coming-popup-container popup-container">
+                <div class="popups__decoration popups__decoration-coming-event"></div>
+                <div class="popups event-coming-popup">
+                    <h2 class="cell-title-text event-coming-popup__title">Coming event on this week:</h2>
+                    <ul class="event-coming-popup__list">
+                    </ul>
                 </div>
             </div>
             <div class="event-search-popup-container popup-container">
@@ -446,6 +450,7 @@
     <script src="./scripts/functions/setLocaleStorageSearchList.js" type="module"></script>
     <script src="./scripts/functions/getLocaleStorageSearchList.js" type="module"></script>
     <script src="./scripts/functions/setActiveDay.js" type="module"></script>
+    <script src="./scripts/functions/comingEventShow.js" type="module"></script>
 </body>
 
 </html>
