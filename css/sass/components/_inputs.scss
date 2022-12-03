@@ -1,0 +1,45 @@
+.input {
+    @include font(1.4rem, 300);
+    color: $color-dark-200;
+    padding: 6px 12px;
+    background-color: $color-light-100;
+    border: 1px solid $color-neutral-200;
+    box-shadow: inset 0px 0px 1px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    outline: 0;
+    @extend %input-transition;
+
+    &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        background: url(../assets/icons/cross.svg) center center no-repeat;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 0px;
+    }
+
+    &::placeholder {
+        color: $color-neutral-200;
+    }
+
+    &:focus {
+        border: 1px solid $color-blue-200;
+        @extend %input-transition;
+    }
+
+    &:invalid {
+        border-color: $color-red-100;
+        color: $color-red-100;
+        @extend %input-transition;
+
+        &::placeholder {
+            color: $color-red-100;
+        }
+    }
+
+    &:disabled {
+        @extend %input-transition;
+        background-color: $color-neutral-100;
+        color: $color-neutral-200;
+    }
+}

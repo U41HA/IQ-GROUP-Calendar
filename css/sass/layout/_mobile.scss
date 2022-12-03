@@ -1,0 +1,34 @@
+main, header {
+    @media (max-width: 1023px) {
+        display: none;
+    }
+}
+
+.mobile-view-container {
+    display: none;
+    background: linear-gradient(45deg, rgb(39, 161, 255), rgb(194, 228, 254));
+
+    @media (max-width: 1023px) {
+        display: block;
+    }
+}
+
+.mobile-view {
+    margin: 0 auto;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.mobile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+    >* {
+        text-align: center;
+    }
+}
+
