@@ -11,7 +11,7 @@
     * Поиск событий;
     * Сохранение календаря в localeStorage;
 ## Реализация
-![Calendar image](/assets/Calendar.jpg)
+![Calendar image](/assets/Git-images/Calendar.jpg)
 ### Верстка
 * Семантическая верстка;
 * Классы по БЭМ;
@@ -23,6 +23,8 @@
     - Архитектура 7-1;
 ### Реализация JS логики
 > Логика реализована без подключения сторонних библиотек на ванильном JS
+> Микропрезинтация основного функционала:
+![Calendar image](/assets/Git-images/Calendar_presentation.gif)
 
 - #### Добавление событий
-
+![Calendar image](/assets/Git-images/calendar_add.jpg)
