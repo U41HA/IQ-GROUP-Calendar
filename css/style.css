@@ -705,6 +705,17 @@ html {
   padding-left: 6px;
 }
 
+.validation-error-popup {
+  position: absolute;
+  bottom: -30px;
+  scale: 0;
+  transition: all 0.3s;
+}
+.validation-error-popup.active {
+  scale: 1;
+  transition: all 0.3s;
+}
+
 ::-webkit-scrollbar {
   background-color: #FFFFFF;
   width: 6px;

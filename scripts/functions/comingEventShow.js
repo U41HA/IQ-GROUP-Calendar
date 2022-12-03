@@ -18,6 +18,7 @@ export function comingEventShow() {
         comingEventPopup.classList.add('active');
     }
 
+
     for (let i = 0; i < allEvents.length; i++) {
         let eventDate = new Date(allEvents[i].querySelector('.search__date').textContent);
         if ((eventDate.getDate() - todayDate.getDate()) <= 7) {

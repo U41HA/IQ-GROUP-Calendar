@@ -29,7 +29,11 @@
                     <div class="popups__decoration popups__decoration-event-quick-add"></div>
                     <div class="close-icon event-quick-add__close"></div>
                     <input type="text" name="event-name" placeholder="November 25, Adventure, Rick Sanchez"
-                        class="input event-quick-add-popup__input">
+                        class="input event-quick-add-popup__input" required>
+                    <div class="popups validation-error-popup">
+                        <div class="popups__decoration popups__decoration-event-quick-add"></div>
+                        <h2 class="cell-title-text">Please, enter correct date in "December 26" format</h2>
+                    </div>
                     <div class="popup-buttons">
                         <button class="button extra-button button-done">Create</button>
                     </div>

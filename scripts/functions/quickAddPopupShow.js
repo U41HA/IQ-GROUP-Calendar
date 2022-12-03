@@ -17,6 +17,8 @@ export function quickAddPopupShow() {
     }
 
     function eventQuickAdd() {
+
+        quickAddPopupInput.removeAttribute('invalid', 'invalid');
         
         if (quickAddPopupInput.value) {
             // Add validation arrays
@@ -31,11 +33,20 @@ export function quickAddPopupShow() {
 
             // Validation of entered date
             const cellDate = () => {
+                const errorPopup = document.querySelector('.validation-error-popup');
+
                 if (monthValidation.includes(cell[0].split(' ')[0].toLowerCase()) && dayValidation.includes(cell[0].split(' ')[1])) {
                     return `${cell[0][0].toUpperCase()}${cell[0].slice(1)}`
                 } else {
                     quickAddPopupInput.value = '';
-                    alert('Please, enter correct date in "December 26" format\nYou also can enter Event Title and Event Member separated by commas\nLike this: "December 12, My Birthday, Rick, Morty, Alex"');
+                    errorPopup.classList.add('active');
+
+                    const errorRemove = () => {
+                        errorPopup.classList.remove('active');
+                        quickAddPopupInput.removeEventListener('click', errorRemove);
+                    }
+
+                    quickAddPopupInput.addEventListener('click', errorRemove);
                     return;
                 }
             };
