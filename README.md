@@ -42,10 +42,10 @@
 ![Calendar image](/assets/Git-images/calendar_search.jpg)
 ![Calendar image](/assets/Git-images/calendar_search_action.jpg)
 Поиск проводится по:
-* Заголовку события
-* Описанию события
-* Участникам события
-* Дате события
++ Заголовку события
++ Описанию события
++ Участникам события
++ Дате события
 
 - #### Сохранение событий в localeStorage и их выгрузка при загрузке страницы
 
