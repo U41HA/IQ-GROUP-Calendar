@@ -1,1 +1,5 @@
-# IQ-GROUP-Calendar
+# IQ-GROUP 
+Тестовое задание
+
+## Соискатель:
+[https://tyumen.hh.ru/resume/4a052802ff0b73c3370039ed1f384633577865](Фрайнд Александр Викторович)
