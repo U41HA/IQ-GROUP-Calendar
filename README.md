@@ -11,7 +11,8 @@
     * Поиск событий;
     * Сохранение календаря в localeStorage;
 ## Реализация
-![Calendar image](/assets/Git-images/Calendar.jpg)
+- #### Микропрезинтация основного функционала (58 секунд):
+![Calendar image](/assets/Git-images/Calendar_presentation.gif)
 ### Верстка
 * Семантическая верстка;
 * Классы по БЭМ;
@@ -23,8 +24,25 @@
     - Архитектура 7-1;
 ### Реализация JS логики
 > Логика реализована без подключения сторонних библиотек на ванильном JS
-> Микропрезинтация основного функционала:
-![Calendar image](/assets/Git-images/Calendar_presentation.gif)
+
+> При написании функций следовал парадигме функционального программирования с использованием чистых функций.
 
 - #### Добавление событий
 ![Calendar image](/assets/Git-images/calendar_add.jpg)
+- #### Просмотр существующих событий
+![Calendar image](/assets/Git-images/calendar_overview.jpg)
+- #### Редактирование событий
+![Calendar image](/assets/Git-images/calendar_edit.jpg)
+- #### Быстрое добавление события
+![Calendar image](/assets/Git-images/calendar_quick-add.jpg)
+- #### Поиск по существующим событиями
+![Calendar image](/assets/Git-images/calendar_search.jpg)
+![Calendar image](/assets/Git-images/calendar_search_action.jpg)
+- #### Сохранение событий в localeStorage и их выгрузка при загрузке страницы
+
+### Дополнительный функционал
+> За рамками ТЗ были реализованы две дополнительных функции:
+- #### Выделение текущего дня специальным стилем
+![Calendar image](/assets/Git-images/calendar_today.jpg)
+- #### Функция просмотра ближайших событий на неделю
+![Calendar image](/assets/Git-images/calendar_coming-event.jpg)
