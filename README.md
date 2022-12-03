@@ -35,6 +35,8 @@
 ![Calendar image](/assets/Git-images/calendar_edit.jpg)
 - #### Быстрое добавление события
 ![Calendar image](/assets/Git-images/calendar_quick-add.jpg)
+Реализована валидация значения инпута
+![Calendar image](/assets/Git-images/calendar_validation.jpg)
 - #### Поиск по существующим событиями
 ![Calendar image](/assets/Git-images/calendar_search.jpg)
 ![Calendar image](/assets/Git-images/calendar_search_action.jpg)
