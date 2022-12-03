@@ -578,7 +578,7 @@ html {
 }
 
 .event-add-popup {
-  width: 266px;
+  min-width: 266px;
 }
 
 .popups__decoration-event-add {
@@ -612,7 +612,7 @@ html {
 }
 
 .event-overview-popup {
-  width: 266px;
+  min-width: 266px;
 }
 
 .popups__decoration-event-overview {
@@ -817,6 +817,7 @@ html {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 8px;
+  overflow: hidden;
   transition: background-color 0.3s;
 }
 .day:not(:last-child) {
